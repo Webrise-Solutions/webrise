@@ -1,0 +1,416 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Webrise design system.
+ * All brand colours are declared once here as oklch tokens and exposed to
+ * Tailwind through @theme inline. Components must never hardcode colours.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-sans: Poppins, ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand tokens */
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-teal: var(--teal);
+  --color-teal-dark: var(--teal-dark);
+  --color-teal-soft: var(--teal-soft);
+  --color-orange: var(--orange);
+  --color-rust: var(--rust);
+  --color-rust-dark: var(--rust-dark);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-night: var(--night);
+  --color-deep: var(--deep);
+  --color-mint: var(--mint);
+  --color-input-line: var(--input-line);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-offwhite: var(--offwhite);
+  --color-surface: var(--surface);
+
+  --shadow-card: 0 2px 8px oklch(0.300 0.033 195.5 / 0.06);
+  --shadow-lift: 0 12px 30px oklch(0.300 0.033 195.5 / 0.1);
+  --shadow-panel: 0 16px 40px oklch(0.300 0.033 195.5 / 0.08);
+  --shadow-float: 0 16px 40px oklch(0.300 0.033 195.5 / 0.14);
+  --shadow-cta: 0 6px 18px oklch(0.567 0.185 34.3 / 0.24);
+  --shadow-cta-lg: 0 8px 22px oklch(0.567 0.185 34.3 / 0.35);
+  --shadow-tab: 0 8px 20px oklch(0.489 0.08 194.8 / 0.25);
+  --shadow-dark: 0 16px 40px oklch(0.234 0.029 195.4 / 0.25);
+
+  --animate-orbit: wr-orbit 46s linear infinite;
+  --animate-orbit-rev: wr-orbit-rev 46s linear infinite;
+  --animate-soft-pulse: wr-pulse 5s ease-in-out infinite;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --cream: oklch(0.957 0.012 79.8);
+  --sand: oklch(0.927 0.018 81.3);
+  --ink: oklch(0.3 0.033 195.5);
+  --teal: oklch(0.489 0.08 194.8);
+  --teal-dark: oklch(0.379 0.062 194.9);
+  --teal-soft: oklch(0.933 0.018 192.6);
+  --orange: oklch(0.686 0.205 34.6);
+  --rust: oklch(0.567 0.185 34.3);
+  --rust-dark: oklch(0.524 0.173 35.5);
+  --line: oklch(0.866 0.017 79.3);
+  --line-soft: oklch(0.909 0.018 81.3);
+  --night: oklch(0.234 0.029 195.4);
+  --deep: oklch(0.31 0.049 194.9);
+  --mint: oklch(0.785 0.051 193);
+  --input-line: oklch(0.758 0.025 79.7);
+  --success: oklch(0.515 0.11 156.8);
+  --success-soft: oklch(0.948 0.018 161.1);
+  --offwhite: oklch(0.983 0.006 84.6);
+  --surface: oklch(1 0 0);
+
+  --background: var(--cream);
+  --foreground: oklch(0.398 0.016 190.4);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--rust);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--teal-soft);
+  --secondary-foreground: var(--teal-dark);
+  --muted: var(--sand);
+  --muted-foreground: oklch(0.514 0.019 182.2);
+  --accent: var(--teal);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: var(--line);
+  --input: var(--input-line);
+  --ring: var(--teal);
+}
+
+@keyframes wr-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wr-orbit-rev {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes wr-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-teal-dark);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::marker {
+    content: "";
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .wr-motion {
+      animation: none !important;
+    }
+  }
+}
+
+/* Rich-text editor surface. Browsers do not style contenteditable children,
+   so headings, lists and quotes need explicit rules to be visible while
+   writing. Scoped to .wr-rich so nothing else on the site is affected. */
+.wr-rich h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 1.3rem 0 0.55rem;
+  color: var(--ink);
+}
+.wr-rich h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 1.2rem 0 0.5rem;
+  color: var(--ink);
+}
+.wr-rich h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+  color: var(--ink);
+}
+.wr-rich h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.9rem 0 0.35rem;
+  color: var(--ink);
+}
+.wr-rich h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0.85rem 0 0.3rem;
+  color: var(--ink);
+}
+.wr-rich h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0.8rem 0 0.3rem;
+  color: var(--muted-foreground);
+}
+.wr-rich p {
+  margin: 0.7rem 0;
+}
+.wr-rich ul,
+.wr-rich ol {
+  margin: 0.7rem 0;
+  padding-left: 1.5rem;
+}
+.wr-rich ul {
+  list-style: disc;
+}
+.wr-rich ol {
+  list-style: decimal;
+}
+.wr-rich li {
+  margin: 0.2rem 0;
+}
+.wr-rich blockquote {
+  margin: 0.9rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--teal);
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+.wr-rich pre {
+  margin: 0.9rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: var(--sand);
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+.wr-rich a {
+  color: var(--teal);
+  text-decoration: underline;
+}
+.wr-rich img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+}
+.wr-rich hr {
+  margin: 1.2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.wr-rich:empty::before {
+  content: "Start writing...";
+  color: var(--muted-foreground);
+}
+
+/* Published article and case-study bodies. The editor styles (.wr-rich) are
+   for writing; these are for reading, so the measure is tighter and the
+   vertical rhythm is looser. */
+.wr-prose > *:first-child {
+  margin-top: 0;
+}
+.wr-prose h1,
+.wr-prose h2 {
+  font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 2.2rem 0 0.8rem;
+}
+.wr-prose h3 {
+  font-size: clamp(1.125rem, 1.05rem + 0.35vw, 1.35rem);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 1.8rem 0 0.6rem;
+}
+.wr-prose h4,
+.wr-prose h5,
+.wr-prose h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 1.5rem 0 0.5rem;
+}
+.wr-prose p {
+  margin: 1.1rem 0;
+}
+.wr-prose ul,
+.wr-prose ol {
+  margin: 1.1rem 0;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 0.4rem;
+}
+.wr-prose ul {
+  list-style: disc;
+}
+.wr-prose ol {
+  list-style: decimal;
+}
+.wr-prose strong,
+.wr-prose b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.wr-prose a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.wr-prose a:hover {
+  color: var(--teal-dark);
+}
+.wr-prose blockquote {
+  margin: 1.5rem 0;
+  padding: 0.2rem 0 0.2rem 1.25rem;
+  border-left: 3px solid var(--teal);
+  color: var(--ink);
+  font-style: italic;
+}
+.wr-prose pre {
+  margin: 1.4rem 0;
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  background: var(--night);
+  color: var(--mint);
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.wr-prose code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  background: var(--sand);
+  border-radius: 5px;
+  padding: 0.12em 0.35em;
+}
+.wr-prose pre code {
+  background: none;
+  padding: 0;
+}
+.wr-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--line-soft);
+  margin: 1.6rem 0;
+}
+.wr-prose hr {
+  margin: 2.2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}

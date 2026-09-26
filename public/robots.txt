@@ -1,0 +1,30 @@
+# A named user-agent group REPLACES the wildcard group for that crawler — it
+# does not add to it. Googlebot and Bingbot therefore need their own Disallow
+# lines; without them, listing those crawlers here was quietly granting them
+# the /admin access the wildcard group denies everyone else.
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /unsubscribe
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /unsubscribe
+
+# Link unfurlers need the public pages to render previews.
+User-agent: Twitterbot
+Allow: /
+Disallow: /admin
+
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /admin
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /unsubscribe
+
+Sitemap: https://webrise.co.uk/sitemap.xml
